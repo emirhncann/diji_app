@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:social_movie_app/screens/sign_in.dart';
+import 'firebase_options.dart';
+import 'screens/sign_in.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -25,9 +33,12 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            // Add your button action here
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SignIn()),
+            );
           },
-          child: Text('Click me'),
+          child: Text('Sign in'),
         ),
       ),
     );
