@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(consflutterfire configure --project=btbs-moviet MyApp());
 }
 
 class MyApp extends StatelessWidget {
