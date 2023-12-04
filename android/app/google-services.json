@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "226847379233",
+    "project_id": "btbs-movie",
+    "storage_bucket": "btbs-movie.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226847379233:android:cce02acbf4b523935e3860",
+        "android_client_info": {
+          "package_name": "com.example.social_movie_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuVGmLqllXG3l23r7rvj2roykEwe8ekJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
