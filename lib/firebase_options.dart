@@ -67,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '226847379233',
     projectId: 'btbs-movie',
     storageBucket: 'btbs-movie.appspot.com',
+    iosClientId: '226847379233-s3r8dj6kdm661bc6kqa2483f02srtuec.apps.googleusercontent.com',
     iosBundleId: 'com.example.socialMovieApp',
   );
 
@@ -76,6 +77,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '226847379233',
     projectId: 'btbs-movie',
     storageBucket: 'btbs-movie.appspot.com',
+    iosClientId: '226847379233-qtntaae94m6567hjkrbasb9muiuujuis.apps.googleusercontent.com',
     iosBundleId: 'com.example.socialMovieApp.RunnerTests',
   );
 }
