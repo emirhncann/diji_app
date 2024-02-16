@@ -19,8 +19,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   bool _isLoading = false;
 
-
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
