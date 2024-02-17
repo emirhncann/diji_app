@@ -38,6 +38,7 @@ dependencies:
   cloud_firestore: ^4.13.6
   firebase_storage: ^11.6.5
   google_sign_in: ^6.2.1
+  google_generative_ai: ^0.2.0
 
 
 

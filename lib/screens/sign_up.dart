@@ -60,7 +60,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ? CircularProgressIndicator() // Loading animasyonu
                     : ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: Color(0xFF0D9E2A),
+                            backgroundColor: Color(0xFF0D9E2A),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
                         onPressed: _isLoading

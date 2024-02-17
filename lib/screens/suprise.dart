@@ -93,15 +93,16 @@ class _SupriseMePageState extends State<SupriseMePage>
                   : CircularProgressIndicator(),
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
           ElevatedButton(
             onPressed: () {
               _startRotationAnimation(); // Butona basıldığında animasyonu başlat
             },
             child: Text('Surprise Me!'),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Text("data"),
           SizedBox(
             height: 20,
           ),
