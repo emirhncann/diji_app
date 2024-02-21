@@ -34,7 +34,7 @@ class _PreferencePageState extends State<PreferencePage> {
   List<Uint8List?> movieImages =
       List.filled(2, null); // Film resimlerini saklamak için liste eklendi
 
-  // Kategoriler ve puanları
+  // K
   Map<String, int> categories = {
     'Gerilim': 0,
     'Bilim Kurgu': 0,
@@ -53,15 +53,15 @@ class _PreferencePageState extends State<PreferencePage> {
   void selectOption(String movieName) {
     setState(() {
       selectedMovies.add(movieName);
-      progressStep++; // Her seçenek seçildiğinde ilerleme adımını artır
-      increaseCategoryPoint(movieName); // Seçilen film kategorisine puan ekle
+      progressStep++; 
+      increaseCategoryPoint(movieName); // Seçilen film kategorisine +1
     });
 
     if (progressStep < 5) {
-      // Eğer henüz 5 adım tamamlanmadıysa, yeni filmleri getir
+      
       updateOptions();
     } else {
-      // Eğer 5 adım tamamlandıysa, kategorileri Firestore'a kaydet
+      
       saveCategoriesToFirestore();
     }
   }
@@ -78,7 +78,7 @@ class _PreferencePageState extends State<PreferencePage> {
   }
 
   void increaseCategoryPoint(String movieName) {
-    // Her film için kategorisine göre puan ekle
+  
     switch (movieName) {
       case "Esaretin Bedeli":
         categories['Gerilim'] = categories['Gerilim']! + 1;
