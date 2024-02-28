@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:social_movie_app/constants/color.dart';
+import 'package:social_movie_app/screens/preferences.dart';
 
 class RegistrationScreen extends StatefulWidget {
   @override
@@ -25,8 +27,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Color(0xFFD9D9D9),
+      backgroundColor: AppColors.dark,
       appBar: AppBar(
+        backgroundColor: AppColors.red,
         title: Text('Kayıt Ol'),
       ),
       body: SingleChildScrollView(
@@ -60,13 +63,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ? CircularProgressIndicator() // Loading animasyonu
                     : ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF0D9E2A),
+                            backgroundColor: AppColors.red,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
                         onPressed: _isLoading
                             ? null
                             : () async {
                                 await registerUser();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PreferencePage()),
+                                );
                               },
                         child: Text(
                           'Kayıt Ol',

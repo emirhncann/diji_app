@@ -53,15 +53,13 @@ class _PreferencePageState extends State<PreferencePage> {
   void selectOption(String movieName) {
     setState(() {
       selectedMovies.add(movieName);
-      progressStep++; 
+      progressStep++;
       increaseCategoryPoint(movieName); // Seçilen film kategorisine +1
     });
 
     if (progressStep < 5) {
-      
       updateOptions();
     } else {
-      
       saveCategoriesToFirestore();
     }
   }
@@ -78,7 +76,6 @@ class _PreferencePageState extends State<PreferencePage> {
   }
 
   void increaseCategoryPoint(String movieName) {
-  
     switch (movieName) {
       case "Esaretin Bedeli":
         categories['Gerilim'] = categories['Gerilim']! + 1;
@@ -240,7 +237,7 @@ class _PreferencePageState extends State<PreferencePage> {
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
             SizedBox(
-              width: 200, // İlerleme çubuğunun genişliği
+              width: 200,
               child: LinearProgressIndicator(
                 color: Color.fromRGBO(239, 37, 35, 1),
                 value: progressStep / 5, // 5 adımlık ilerleme

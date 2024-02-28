@@ -32,7 +32,7 @@ class _SupriseMePageState extends State<SupriseMePage>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: Duration(milliseconds: 2000),
     );
 
     _animation = Tween<double>(
@@ -103,8 +103,9 @@ class _SupriseMePageState extends State<SupriseMePage>
           ),
           ElevatedButton(
             onPressed: () async {
+              _startRotationAnimation();
               await movieSuggest();
-              _startRotationAnimation(); // Butona basıldığında animasyonu başlat
+              // Butona basıldığında animasyonu başlat
             },
             child: Text('Surprise Me!'),
           ),
@@ -131,7 +132,7 @@ class _SupriseMePageState extends State<SupriseMePage>
     final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
     final content = [
       Content.text(
-          'Bana bir adet film öner, sadece filmin adı, çıkış yılı ve imdb puanını ver')
+          'rastgele 1 tane film öner. . çıktıyı şu şekilde ver: Film adı, Çıkış yılı, İMDB Puan/10,Her bir satırı alt alta yaz')
     ];
     final response = await model.generateContent(content);
     setState(() {
