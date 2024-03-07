@@ -13,22 +13,25 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CurvedNavigationBar(
-      index: 0,
-      height: 60.0,
-      items: <Widget>[
-        Icon(Icons.home, size: 30, color: Colors.white),
-        Icon(Icons.brightness_low, size: 30, color: Colors.white),
-        Icon(Icons.group, size: 30, color: Colors.white),
-        Icon(Icons.person, size: 30, color: Colors.white),
-      ],
-      backgroundColor: Colors.transparent,
-      color: AppColors.red,
-      buttonBackgroundColor: AppColors.red,
-      animationCurve: Curves.easeInOut,
-      animationDuration: Duration(milliseconds: 500),
-      onTap: onPageChanged,
-      letIndexChange: (index) => true,
+    return Padding(
+      padding: EdgeInsets.only(top: 1), // Üst padding için 1 piksel ayarlandı
+      child: CurvedNavigationBar(
+        index: 0,
+        height: 60.0,
+        items: <Widget>[
+          Icon(Icons.home, size: 30, color: Colors.white),
+          Icon(Icons.brightness_low, size: 30, color: Colors.white),
+          Icon(Icons.group, size: 30, color: Colors.white),
+          Icon(Icons.person, size: 30, color: Colors.white),
+        ],
+        backgroundColor: Colors.transparent, // Arka planı şeffaf yapar
+        color: AppColors.red,
+        buttonBackgroundColor: AppColors.red,
+        animationCurve: Curves.easeInOut,
+        animationDuration: Duration(milliseconds: 500),
+        onTap: onPageChanged,
+        letIndexChange: (index) => true,
+      ),
     );
   }
 }

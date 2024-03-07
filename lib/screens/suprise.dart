@@ -20,7 +20,8 @@ class _SupriseMePageState extends State<SupriseMePage>
   late AnimationController _animationController;
   late Animation<double> _animation;
 
-  late Uint8List _wheelImage;
+  Uint8List _wheelImage = Uint8List(0);
+
   final storage = FirebaseStorage.instance;
 
   String responseText = '';
@@ -28,6 +29,7 @@ class _SupriseMePageState extends State<SupriseMePage>
   @override
   void initState() {
     super.initState();
+    movieSuggest();
     _fetchWheelImage();
 
     _animationController = AnimationController(

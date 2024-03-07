@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart'; // Firestore eklendi
 import 'dart:math';
 
 import 'package:social_movie_app/constants/color.dart';
+import 'package:social_movie_app/screens/suprise.dart';
 
 final storage =
     FirebaseStorage.instanceFor(bucket: "gs://btbs-movie.appspot.com/");
@@ -70,6 +71,13 @@ class _PreferencePageState extends State<PreferencePage> {
       'categories': categories,
     }).then((value) {
       print('Kategoriler Firestore\'a kaydedildi.');
+
+      Future.delayed(Duration(milliseconds: 500), () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => SupriseMePage()),
+        );
+      });
     }).catchError((error) {
       print('Kategorileri Firestore\'a kaydederken hata oluştu: $error');
     });
@@ -118,12 +126,10 @@ class _PreferencePageState extends State<PreferencePage> {
   void updateOptions() {
     List<String> newSelectedMovies = generateRandomMovies();
     selectedMovies = newSelectedMovies;
-    loadNewImages(
-        newSelectedMovies); // Yeni seçilen filmler için resimleri yükle
+    loadNewImages(newSelectedMovies);
   }
 
   void loadNewImages(List<String> newSelectedMovies) {
-    // Önceki resimleri temizle
     movieImages.fillRange(0, movieImages.length, null);
 
     for (var i = 0; i < newSelectedMovies.length; i++) {
@@ -156,12 +162,12 @@ class _PreferencePageState extends State<PreferencePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(categories); // Kategorileri konsola yazdır
+    print(categories);
     return Scaffold(
       backgroundColor: AppColors.dark,
       appBar: AppBar(
         title: Text('Film Tercihi'),
-        backgroundColor: AppColors.red, // Bar rengi
+        backgroundColor: AppColors.red,
       ),
       body: Center(
         child: Column(
@@ -240,7 +246,7 @@ class _PreferencePageState extends State<PreferencePage> {
               width: 200,
               child: LinearProgressIndicator(
                 color: Color.fromRGBO(239, 37, 35, 1),
-                value: progressStep / 5, // 5 adımlık ilerleme
+                value: progressStep / 5,
               ),
             )
           ],

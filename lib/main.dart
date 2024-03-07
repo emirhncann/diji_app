@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:social_movie_app/screens/account.dart';
 import 'package:social_movie_app/screens/home.dart';
+import 'package:social_movie_app/screens/my_profile.dart';
 import 'package:social_movie_app/screens/preferences.dart';
+import 'package:social_movie_app/screens/account.dart';
 import 'package:social_movie_app/screens/sign_in.dart';
 import 'package:social_movie_app/screens/sign_up.dart';
 import 'package:social_movie_app/screens/suprise.dart';
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Diji',
-      home: SupriseMePage(),
+      home: AccountPage(),
     );
   }
 }
