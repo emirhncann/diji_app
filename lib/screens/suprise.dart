@@ -134,7 +134,7 @@ class _SupriseMePageState extends State<SupriseMePage>
     final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
     final content = [
       Content.text(
-          'rastgele 1 tane film öner. . çıktıyı şu şekilde ver: Film adı, Çıkış yılı, İMDB Puan/10,Her bir satırı alt alta yaz')
+          'son 10 yılda kesinlikle izlenmesi gereken rastgele 1 tane film öner. . çıktıyı şu şekilde ver: Film adı, Çıkış yılı, İMDB Puan/10,Her bir satırı alt alta yaz')
     ];
     final response = await model.generateContent(content);
     setState(() {
