@@ -50,9 +50,8 @@ class ProfilePage extends StatelessWidget {
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: 10, // Kullanıcının post sayısı buraya gelir
+              itemCount: 10, // Kullanıcının post sayısı sonradan degistir
               itemBuilder: (context, index) {
-                // Örnek olarak, postları gösteren bir Card kullanarak devam edebilirsiniz
                 return Card(
                   color: Colors.black87,
                   child: ListTile(
@@ -64,9 +63,8 @@ class ProfilePage extends StatelessWidget {
                       'Kullanıcı Yorumu Kullanıcı Yorumu Kullanıcı Yorumu Kullanıcı Yorumu Kullanıcı Yorumu Kullanıcı Yorumu ',
                       style: TextStyle(color: Colors.white),
                     ),
-                    // Posta tıklanınca yapılacak işlemler buraya eklenebilir
                     onTap: () {
-                      // Posta tıklanınca yapılacak işlemler
+                      // gönderme islemi
                     },
                   ),
                 );
@@ -74,6 +72,55 @@ class ProfilePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Pop-up açılacak
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                backgroundColor: AppColors.dark,
+                title: Text(
+                    style: TextStyle(color: AppColors.white), "Gönderi ekle"),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Film Adı'),
+                    ),
+                    SizedBox(height: 10),
+                    TextField(
+                      decoration: InputDecoration(labelText: "Yorumunuz"),
+                      keyboardType: TextInputType.multiline,
+                      minLines: 1,
+                      maxLines: 5,
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Text("Yıldız Ver: "),
+                        // Buraya yıldız verme aracı gelecek
+                      ],
+                    ),
+                  ],
+                ),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Yorumu paylaş
+
+                      Navigator.pop(context);
+                    },
+                    child: Text("Paylaş"),
+                  ),
+                ],
+              );
+            },
+          );
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.red,
       ),
       backgroundColor: AppColors.dark,
       bottomNavigationBar: BottomNavBar(
