@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:social_movie_app/constants/color.dart';
 import 'package:social_movie_app/screens/account.dart';
 import 'package:social_movie_app/screens/home.dart';
 import 'package:social_movie_app/screens/my_profile.dart';
@@ -26,6 +27,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Diji',
+      theme: ThemeData(
+          colorScheme: ColorScheme(
+              brightness: Brightness.dark,
+              primary: AppColors.white,
+              onPrimary: AppColors.white,
+              secondary: AppColors.red,
+              onSecondary: AppColors.white,
+              error: AppColors.red,
+              onError: AppColors.red,
+              background: AppColors.white,
+              onBackground: AppColors.white,
+              surface: AppColors.dark,
+              onSurface: AppColors.red)),
       home: ProfilePage(),
     );
   }

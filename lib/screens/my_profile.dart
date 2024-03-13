@@ -91,7 +91,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     TextField(
-                      decoration: InputDecoration(labelText: "Yorumunuz"),
+                      decoration: InputDecoration(
+                          labelText: "Yorumunuz", hoverColor: AppColors.red),
                       keyboardType: TextInputType.multiline,
                       minLines: 1,
                       maxLines: 5,
