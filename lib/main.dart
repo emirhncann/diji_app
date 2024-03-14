@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Diji',
       theme: ThemeData(
-          colorScheme: ColorScheme(
+          colorScheme: const ColorScheme(
               brightness: Brightness.dark,
               primary: AppColors.white,
               onPrimary: AppColors.white,
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
               onBackground: AppColors.white,
               surface: AppColors.dark,
               onSurface: AppColors.red)),
-      home: ProfilePage(),
+      home: SupriseMePage(),
     );
   }
 }

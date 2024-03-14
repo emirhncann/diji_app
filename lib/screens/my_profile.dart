@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:social_movie_app/constants/bottom_nav_bar.dart';
 import 'package:social_movie_app/constants/color.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  List<Post> posts = []; // List to store posts
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,29 +54,39 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 10, // Kullanıcının post sayısı sonradan degistir
-              itemBuilder: (context, index) {
-                return Card(
-                  color: Colors.black87,
-                  child: ListTile(
-                    title: Text(
-                      'Film adı',
-                      style: TextStyle(color: Colors.white),
+            posts.isEmpty
+                ? Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 100),
+                      child: Text(
+                        'Henüz gönderi yok. Hemen ilk gönderini oluştur',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                    subtitle: Text(
-                      'Kullanıcı Yorumu Kullanıcı Yorumu Kullanıcı Yorumu Kullanıcı Yorumu Kullanıcı Yorumu Kullanıcı Yorumu ',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onTap: () {
-                      // gönderme islemi
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: posts.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        color: Colors.black87,
+                        child: ListTile(
+                          title: Text(
+                            posts[index].filmName,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          subtitle: Text(
+                            posts[index].comment,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onTap: () {
+                            // gönderme islemi
+                          },
+                        ),
+                      );
                     },
                   ),
-                );
-              },
-            ),
           ],
         ),
       ),
@@ -79,38 +96,43 @@ class ProfilePage extends StatelessWidget {
           showDialog(
             context: context,
             builder: (BuildContext context) {
+              String filmName = '';
+              String comment = '';
               return AlertDialog(
                 backgroundColor: AppColors.dark,
                 title: Text(
-                    style: TextStyle(color: AppColors.white), "Gönderi ekle"),
+                  'Gönderi ekle',
+                  style: TextStyle(color: AppColors.white),
+                ),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextField(
                       decoration: InputDecoration(labelText: 'Film Adı'),
+                      onChanged: (value) {
+                        filmName = value;
+                      },
                     ),
                     SizedBox(height: 10),
                     TextField(
-                      decoration: InputDecoration(
-                          labelText: "Yorumunuz", hoverColor: AppColors.red),
+                      decoration: InputDecoration(labelText: "Yorumunuz"),
                       keyboardType: TextInputType.multiline,
                       minLines: 1,
                       maxLines: 5,
+                      onChanged: (value) {
+                        comment = value;
+                      },
                     ),
                     SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Text("Yıldız Ver: "),
-                        // Buraya yıldız verme aracı gelecek
-                      ],
-                    ),
                   ],
                 ),
                 actions: [
                   ElevatedButton(
                     onPressed: () {
                       // Yorumu paylaş
-
+                      setState(() {
+                        posts.add(Post(filmName, comment));
+                      });
                       Navigator.pop(context);
                     },
                     child: Text("Paylaş"),
@@ -130,4 +152,11 @@ class ProfilePage extends StatelessWidget {
       ),
     );
   }
+}
+
+class Post {
+  String filmName;
+  String comment;
+
+  Post(this.filmName, this.comment);
 }
