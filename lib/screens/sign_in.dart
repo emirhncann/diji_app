@@ -26,6 +26,7 @@ class _SignInScreenState extends State<SignInScreen> {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: _email,
         password: _password,
+        
       );
       print('E-posta ile giriş yapıldı: ${userCredential.user!.uid}');
     } catch (e) {

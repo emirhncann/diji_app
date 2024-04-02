@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:typed_data';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -67,7 +68,9 @@ class _PreferencePageState extends State<PreferencePage> {
 
   void saveCategoriesToFirestore() {
     // Kategorileri Firestore'a kaydet
-    firestore.collection('users').doc('USER_ID').set({
+    String userId =
+        FirebaseAuth.instance.currentUser!.uid; // Get the current user's ID
+    firestore.collection('users').doc(userId).update({
       'categories': categories,
     }).then((value) {
       print('Kategoriler Firestore\'a kaydedildi.');

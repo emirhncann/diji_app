@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
               onBackground: AppColors.white,
               surface: AppColors.dark,
               onSurface: AppColors.red)),
-      home: ProfilePage(),
+      home: PreferencePage(),
     );
   }
 }

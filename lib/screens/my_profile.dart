@@ -12,6 +12,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    int postCount = posts.length;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.red,
@@ -44,7 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               TextStyle(fontSize: 24, color: AppColors.white),
                         ),
                         Text(
-                          '10 Gönderi',
+                          '$postCount Gönderi',
                           style:
                               TextStyle(fontSize: 12, color: AppColors.white),
                         ),
@@ -69,15 +71,16 @@ class _ProfilePageState extends State<ProfilePage> {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: posts.length,
                     itemBuilder: (context, index) {
+                      final reversedIndex = posts.length - 1 - index;
                       return Card(
                         color: Colors.black87,
                         child: ListTile(
                           title: Text(
-                            posts[index].filmName,
+                            posts[reversedIndex].filmName,
                             style: TextStyle(color: Colors.white),
                           ),
                           subtitle: Text(
-                            posts[index].comment,
+                            posts[reversedIndex].comment,
                             style: TextStyle(color: Colors.white),
                           ),
                           onTap: () {
