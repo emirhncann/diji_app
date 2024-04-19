@@ -26,11 +26,14 @@ dependencies:
   flutter:
     sdk: flutter
 
-  curved_navigation_bar: ^1.0.3
+  
+  http: ^1.2.1
 
   #STYLE
   cupertino_icons: ^1.0.6
   google_fonts: ^6.1.0
+  carousel_slider: ^4.2.1
+  curved_navigation_bar: ^1.0.3
 
   #FIREBASE
   firebase_core: ^2.24.0
