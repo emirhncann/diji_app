@@ -28,7 +28,9 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Popüler Filmler"),
+              Text(
+                "Popüler Filmler",
+              ),
               SizedBox(
                 height: 16,
               ),
@@ -74,8 +76,8 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(8),
                             child: Container(
                               color: Colors.amber,
-                              height: 200,
-                              width: 200,
+                              height: 300,
+                              width: 150,
                             ),
                           ));
                     }),
@@ -99,8 +101,8 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(8),
                             child: Container(
                               color: Colors.amber,
-                              height: 200,
-                              width: 200,
+                              height: 300,
+                              width: 150,
                             ),
                           ));
                     }),
