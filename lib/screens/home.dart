@@ -2,6 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:social_movie_app/constants/bottom_nav_bar.dart';
 import 'package:social_movie_app/constants/color.dart';
+import 'package:social_movie_app/screens/account.dart';
+import 'package:social_movie_app/screens/my_profile.dart';
+import 'package:social_movie_app/screens/suprise.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    var _pageIndex = 0;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.red,
@@ -107,14 +111,62 @@ class _HomePageState extends State<HomePage> {
                           ));
                     }),
               ),
+              const SizedBox(height: 16),
+              Text("En Yüksek Puanlı Filmler"),
+              SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                height: 200,
+                width: double.infinity,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Container(
+                              color: Colors.amber,
+                              height: 300,
+                              width: 150,
+                            ),
+                          ));
+                    }),
+              ),
             ],
           ),
         ),
       ),
       backgroundColor: AppColors.dark,
       bottomNavigationBar: BottomNavBar(
-        pageIndex: 4,
-        onPageChanged: (int value) {},
+        pageIndex: _pageIndex,
+        onPageChanged: (int index) {
+          setState(() {
+            _pageIndex = index;
+          });
+
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SupriseMePage()),
+            );
+          }
+          if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
+          }
+          if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AccountPage()),
+            );
+          }
+        },
       ),
     );
   }

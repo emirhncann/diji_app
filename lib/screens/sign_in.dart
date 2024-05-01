@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:social_movie_app/constants/color.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:social_movie_app/screens/sign_up.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -26,7 +27,6 @@ class _SignInScreenState extends State<SignInScreen> {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: _email,
         password: _password,
-        
       );
       print('E-posta ile giriş yapıldı: ${userCredential.user!.uid}');
     } catch (e) {
@@ -152,7 +152,11 @@ class _SignInScreenState extends State<SignInScreen> {
               SizedBox(height: 20.0),
               TextButton(
                 onPressed: () {
-                  // Hesap oluşturma ekranına yönlendirme burada yapılabilir.
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RegistrationScreen()),
+                  );
                 },
                 child: Text(
                   'Hesabınız yoksa üye olun',

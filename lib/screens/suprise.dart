@@ -7,6 +7,9 @@ import 'package:social_movie_app/constants/color.dart';
 import 'dart:io';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:social_movie_app/constants/api.dart';
+import 'package:social_movie_app/screens/account.dart';
+import 'package:social_movie_app/screens/home.dart';
+import 'package:social_movie_app/screens/my_profile.dart';
 
 class SupriseMePage extends StatefulWidget {
   const SupriseMePage({Key? key}) : super(key: key);
@@ -81,6 +84,7 @@ class _SupriseMePageState extends State<SupriseMePage>
 
   @override
   Widget build(BuildContext context) {
+    var _pageIndex = 1;
     return Scaffold(
       appBar: AppBar(
         title: Text('Surprise Me'),
@@ -118,8 +122,31 @@ class _SupriseMePageState extends State<SupriseMePage>
       ),
       backgroundColor: AppColors.dark,
       bottomNavigationBar: BottomNavBar(
-        pageIndex: 4,
-        onPageChanged: (int value) {},
+        pageIndex: _pageIndex,
+        onPageChanged: (int index) {
+          setState(() {
+            _pageIndex = index;
+          });
+
+          if (index == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          }
+          if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
+          }
+          if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AccountPage()),
+            );
+          }
+        },
       ),
     );
   }

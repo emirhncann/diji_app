@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:social_movie_app/constants/bottom_nav_bar.dart';
 import 'package:social_movie_app/constants/color.dart';
+import 'package:social_movie_app/screens/account.dart';
+import 'package:social_movie_app/screens/home.dart';
+import 'package:social_movie_app/screens/suprise.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -14,6 +17,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     int postCount = posts.length;
 
+    var _pageIndex = 2;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.red,
@@ -150,8 +154,31 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       backgroundColor: AppColors.dark,
       bottomNavigationBar: BottomNavBar(
-        pageIndex: 4,
-        onPageChanged: (int value) {},
+        pageIndex: _pageIndex,
+        onPageChanged: (int index) {
+          setState(() {
+            var _pageIndex = index;
+          });
+
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SupriseMePage()),
+            );
+          }
+          if (index == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          }
+          if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AccountPage()),
+            );
+          }
+        },
       ),
     );
   }

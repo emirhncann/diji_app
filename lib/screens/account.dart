@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:social_movie_app/constants/bottom_nav_bar.dart';
 import 'package:social_movie_app/constants/color.dart';
+import 'package:social_movie_app/screens/home.dart';
+import 'package:social_movie_app/screens/my_profile.dart';
+import 'package:social_movie_app/screens/suprise.dart';
 
 class AccountPage extends StatefulWidget {
   @override
@@ -25,6 +29,7 @@ class _AccountPageState extends State<AccountPage> {
 
   @override
   Widget build(BuildContext context) {
+    var _pageIndex = 3;
     return Scaffold(
       appBar: AppBar(
         leading: BackButtonIcon(),
@@ -122,6 +127,33 @@ class _AccountPageState extends State<AccountPage> {
         ),
       ),
       backgroundColor: AppColors.dark,
+      bottomNavigationBar: BottomNavBar(
+        pageIndex: _pageIndex,
+        onPageChanged: (int index) {
+          setState(() {
+            _pageIndex = index;
+          });
+
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SupriseMePage()),
+            );
+          }
+          if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
+          }
+          if (index == 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          }
+        },
+      ),
     );
   }
 }
