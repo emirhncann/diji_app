@@ -152,7 +152,7 @@ class _SupriseMePageState extends State<SupriseMePage>
   }
 
   Future<void> movieSuggest() async {
-    final apiKey = API.gemini_API;
+    final apiKey = API_keys.gemini_API;
     if (apiKey == null) {
       print('API key bulunamadı');
       exit(1);
