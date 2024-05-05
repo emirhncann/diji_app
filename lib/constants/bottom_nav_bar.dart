@@ -26,7 +26,7 @@ class BottomNavBar extends StatelessWidget {
         ],
         backgroundColor: Colors.transparent, // Arka planı şeffaf yapar
         color: AppColors.black,
-        buttonBackgroundColor: AppColors.red,
+        buttonBackgroundColor: Colors.red[800],
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 500),
         onTap: onPageChanged,

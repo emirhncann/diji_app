@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:social_movie_app/constants/api.dart';
+import 'package:social_movie_app/screens/detail_screen.dart';
 
 class popular extends StatelessWidget {
   const popular({
@@ -24,15 +26,25 @@ class popular extends StatelessWidget {
               autoPlayCurve: Curves.fastOutSlowIn,
               autoPlayAnimationDuration: const Duration(seconds: 2)),
           itemBuilder: (context, itemIndex, PageViewIndex) {
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: SizedBox(
-                height: 300,
-                width: 200,
-                child: Image.network(
-                    filterQuality: FilterQuality.high,
-                    fit: BoxFit.cover,
-                    "${API_keys.tmdb_path}${snapshot.data[itemIndex].posterPath}"),
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailScreen(
+                              movie: snapshot.data[itemIndex],
+                            )));
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: SizedBox(
+                  height: 300,
+                  width: 200,
+                  child: Image.network(
+                      filterQuality: FilterQuality.high,
+                      fit: BoxFit.cover,
+                      "${API_keys.tmdb_path}${snapshot.data[itemIndex].posterPath}"),
+                ),
               ),
             );
           },
