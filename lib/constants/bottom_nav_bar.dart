@@ -21,7 +21,7 @@ class BottomNavBar extends StatelessWidget {
         items: <Widget>[
           Icon(Icons.home, size: 30, color: Colors.white),
           Icon(Icons.brightness_low, size: 30, color: Colors.white),
-          Icon(Icons.group, size: 30, color: Colors.white),
+          Icon(Icons.collections_bookmark, size: 30, color: Colors.white),
           Icon(Icons.person, size: 30, color: Colors.white),
         ],
         backgroundColor: Colors.transparent, // Arka planı şeffaf yapar

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:social_movie_app/constants/color.dart';
 import 'package:social_movie_app/screens/account.dart';
 import 'package:social_movie_app/screens/home.dart';
+import 'package:social_movie_app/screens/watch_list_page.dart';
 import 'package:social_movie_app/screens/my_profile.dart';
 import 'package:social_movie_app/screens/preferences.dart';
 import 'package:social_movie_app/screens/account.dart';
@@ -29,9 +30,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Diji',
       theme: ThemeData(
-          colorScheme: const ColorScheme(
+          colorScheme: ColorScheme(
               brightness: Brightness.dark,
-              primary: AppColors.white,
+              primary: AppColors.red,
               onPrimary: AppColors.white,
               secondary: AppColors.red,
               onSecondary: AppColors.white,

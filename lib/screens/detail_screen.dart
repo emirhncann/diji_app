@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:social_movie_app/constants/api.dart';
 import 'package:social_movie_app/constants/color.dart';
 import 'package:social_movie_app/models/movie.dart';
+import 'package:social_movie_app/models/watch_list.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key, required this.movie});
@@ -89,6 +90,14 @@ class DetailScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      addToWatchList("${movie.title}");
+                      print("basıldı");
+                    },
+                    icon: Icon(Icons.collections_bookmark),
+                    label: Text("Daha Sonra İzle"),
+                  )
                 ],
               ),
             ),
@@ -99,3 +108,5 @@ class DetailScreen extends StatelessWidget {
     );
   }
 }
+
+

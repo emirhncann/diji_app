@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:social_movie_app/constants/bottom_nav_bar.dart';
 import 'package:social_movie_app/constants/color.dart';
+import 'package:social_movie_app/models/add_post.dart';
 import 'package:social_movie_app/screens/account.dart';
 import 'package:social_movie_app/screens/home.dart';
 import 'package:social_movie_app/screens/suprise.dart';
@@ -11,7 +12,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  List<Post> posts = []; // List to store posts
+  List<Post> posts = []; // Gönderileri saklamak için bir liste
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: TextStyle(color: Colors.white),
                           ),
                           onTap: () {
-                            // gönderme islemi
+                            // Göndermeye yönlendirme işlemi
                           },
                         ),
                       );
@@ -103,48 +104,12 @@ class _ProfilePageState extends State<ProfilePage> {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-              String filmName = '';
-              String comment = '';
-              return AlertDialog(
-                backgroundColor: AppColors.dark,
-                title: Text(
-                  'Gönderi ekle',
-                  style: TextStyle(color: AppColors.white),
-                ),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextField(
-                      decoration: InputDecoration(labelText: 'Film Adı'),
-                      onChanged: (value) {
-                        filmName = value;
-                      },
-                    ),
-                    SizedBox(height: 10),
-                    TextField(
-                      decoration: InputDecoration(labelText: "Yorumunuz"),
-                      keyboardType: TextInputType.multiline,
-                      minLines: 1,
-                      maxLines: 5,
-                      onChanged: (value) {
-                        comment = value;
-                      },
-                    ),
-                    SizedBox(height: 10),
-                  ],
-                ),
-                actions: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Yorumu paylaş
-                      setState(() {
-                        posts.add(Post(filmName, comment));
-                      });
-                      Navigator.pop(context);
-                    },
-                    child: Text("Paylaş"),
-                  ),
-                ],
+              return AddPostDialog(
+                onPostAdded: (String filmName, String comment) {
+                  setState(() {
+                    posts.add(Post(filmName, comment));
+                  });
+                },
               );
             },
           );

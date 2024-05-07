@@ -1,11 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:social_movie_app/constants/bottom_nav_bar.dart';
 import 'package:social_movie_app/constants/color.dart';
 import 'package:social_movie_app/models/movie.dart';
 import 'package:social_movie_app/models/popular.dart';
 import 'package:social_movie_app/models/movie_slider.dart';
 import 'package:social_movie_app/screens/account.dart';
+import 'package:social_movie_app/screens/watch_list_page.dart';
 import 'package:social_movie_app/screens/my_profile.dart';
 import 'package:social_movie_app/screens/suprise.dart';
 
@@ -34,12 +36,14 @@ class _HomePageState extends State<HomePage> {
     var _pageIndex = 0;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.black,
-        title: Text(
-          'Diji ',
-          style: TextStyle(color: AppColors.white),
-        ),
-      ),
+          backgroundColor: Colors.black54,
+          title: Center(
+            child: Image.asset(
+              'assets/beyaz_png.png',
+              width: 100,
+              height: 100,
+            ),
+          )),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Padding(
@@ -47,8 +51,10 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 "Popüler Filmler",
+                style: GoogleFonts.belleza(
+                    fontSize: 22, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 16,
@@ -68,7 +74,11 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const SizedBox(height: 16),
-              const Text("Yakında Gösterimde"),
+              Text(
+                "Yakında Gösterimde",
+                style: GoogleFonts.belleza(
+                    fontSize: 22, fontWeight: FontWeight.w600),
+              ),
               const SizedBox(
                 height: 16,
               ),
@@ -87,13 +97,21 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const SizedBox(height: 16),
-              const Text("Size Özel"),
+              Text(
+                "Size Özel",
+                style: GoogleFonts.belleza(
+                    fontSize: 22, fontWeight: FontWeight.w600),
+              ),
               const SizedBox(
                 height: 16,
               ),
               third(),
               const SizedBox(height: 16),
-              const Text("En Yüksek Puanlı Filmler"),
+              Text(
+                "En Yüksek Puanlı Filmler",
+                style: GoogleFonts.belleza(
+                    fontSize: 22, fontWeight: FontWeight.w600),
+              ),
               const SizedBox(
                 height: 16,
               ),
@@ -132,40 +150,15 @@ class _HomePageState extends State<HomePage> {
           if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage()),
+              MaterialPageRoute(builder: (context) => WatchlistPage()),
             );
           }
           if (index == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AccountPage()),
+              MaterialPageRoute(builder: (context) => ProfilePage()),
             );
           }
-        },
-      ),
-    );
-  }
-
-  SizedBox last() {
-    return SizedBox(
-      height: 200,
-      width: double.infinity,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Container(
-                color: Colors.amber,
-                height: 300,
-                width: 150,
-              ),
-            ),
-          );
         },
       ),
     );
