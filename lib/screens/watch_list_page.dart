@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:social_movie_app/constants/color.dart';
 import 'package:social_movie_app/models/add_post.dart';
 import 'package:social_movie_app/models/watch_list.dart';
+import 'package:social_movie_app/screens/home.dart';
 
 class WatchlistPage extends StatefulWidget {
   @override
@@ -13,7 +14,21 @@ class _WatchlistPageState extends State<WatchlistPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Daha Sonra İzle'),
+        leading: Container(
+          child: IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            },
+            icon: const Icon(Icons.arrow_back_rounded),
+          ),
+        ),
+        title: Text(
+          'Daha Sonra İzle',
+          style: TextStyle(color: AppColors.white),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 12),
@@ -58,7 +73,7 @@ class _WatchlistPageState extends State<WatchlistPage> {
           },
         ),
       ),
-      backgroundColor: AppColors.black,
+      backgroundColor: Colors.black54,
     );
   }
 

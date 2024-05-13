@@ -78,7 +78,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.dark,
+      backgroundColor: Colors.black54,
       appBar: AppBar(
         title: Center(
           child: Text(
@@ -86,7 +86,7 @@ class _SignInScreenState extends State<SignInScreen> {
             style: TextStyle(color: AppColors.white),
           ),
         ),
-        backgroundColor: AppColors.red,
+        backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         // Ekran küçük olduğunda içeriği kaydır

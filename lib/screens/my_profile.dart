@@ -12,7 +12,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  List<Post> posts = []; // Gönderileri saklamak için bir liste
+  List<Post> posts = [];
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
     var _pageIndex = 2;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.red,
+        backgroundColor: AppColors.black,
         title: Text(
           'Diji ',
           style: TextStyle(color: AppColors.white),
@@ -37,7 +37,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    // Kullanıcının profil fotoğrafını buraya ekleyin
                     backgroundImage: AssetImage('assets/profile_image.jpg'),
                   ),
                   SizedBox(width: 20),
@@ -78,11 +77,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     itemBuilder: (context, index) {
                       final reversedIndex = posts.length - 1 - index;
                       return Card(
-                        color: Colors.black87,
+                        color: AppColors.black,
                         child: ListTile(
                           title: Text(
                             posts[reversedIndex].filmName,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18),
                           ),
                           subtitle: Text(
                             posts[reversedIndex].comment,
@@ -117,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Icon(Icons.add),
         backgroundColor: Colors.red,
       ),
-      backgroundColor: AppColors.dark,
+      backgroundColor: Colors.black54,
       bottomNavigationBar: BottomNavBar(
         pageIndex: _pageIndex,
         onPageChanged: (int index) {

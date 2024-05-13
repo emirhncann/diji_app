@@ -27,11 +27,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: AppColors.dark,
-      appBar: AppBar(
-        backgroundColor: AppColors.red,
-        title: Text('Kayıt Ol'),
-      ),
+      backgroundColor: AppColors.black,
       body: SingleChildScrollView(
         padding: EdgeInsets.only(top: height * 0.1),
         child: Padding(
@@ -39,6 +35,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                "Kayıt Ol",
+                style: TextStyle(
+                    color: AppColors.white,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20),
+              ),
+              SizedBox(height: 10),
               _buildTextField(_nameController, 'Ad', Icons.person),
               SizedBox(height: 16.0),
               _buildTextField(_surnameController, 'Soyad', Icons.person),

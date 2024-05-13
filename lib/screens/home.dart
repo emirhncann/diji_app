@@ -36,14 +36,15 @@ class _HomePageState extends State<HomePage> {
     var _pageIndex = 0;
     return Scaffold(
       appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.black54,
           title: Center(
-            child: Image.asset(
+              /* child: Image.asset(
               'assets/beyaz_png.png',
               width: 100,
               height: 100,
-            ),
-          )),
+            ),*/
+              )),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Padding(

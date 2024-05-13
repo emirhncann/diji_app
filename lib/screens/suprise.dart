@@ -7,6 +7,7 @@ import 'package:social_movie_app/constants/color.dart';
 import 'dart:io';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:social_movie_app/constants/api.dart';
+import 'package:social_movie_app/models/watch_list.dart';
 import 'package:social_movie_app/screens/account.dart';
 import 'package:social_movie_app/screens/home.dart';
 import 'package:social_movie_app/screens/my_profile.dart';
@@ -88,7 +89,7 @@ class _SupriseMePageState extends State<SupriseMePage>
     return Scaffold(
       appBar: AppBar(
         title: Text('Surprise Me'),
-        backgroundColor: AppColors.red,
+        backgroundColor: AppColors.black,
         titleTextStyle: TextStyle(color: Colors.white, fontSize: 22),
       ),
       body: Column(
@@ -107,6 +108,7 @@ class _SupriseMePageState extends State<SupriseMePage>
                   : CircularProgressIndicator(),
             ),
           ),
+          Container(),
           ElevatedButton(
             onPressed: () async {
               _startRotationAnimation();
@@ -120,7 +122,7 @@ class _SupriseMePageState extends State<SupriseMePage>
           ),
         ],
       ),
-      backgroundColor: AppColors.dark,
+      backgroundColor: Colors.black54,
       bottomNavigationBar: BottomNavBar(
         pageIndex: _pageIndex,
         onPageChanged: (int index) {
@@ -177,12 +179,19 @@ class _SupriseMePageState extends State<SupriseMePage>
         return AlertDialog(
           title: Text("Film Önerisi"),
           content: Text(responseText),
-          actions: [
+          actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Tamam"),
+              child: Text('Hayır'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                addToWatchList(responseText);
+              },
+              child: Text('Evet'),
             ),
           ],
         );

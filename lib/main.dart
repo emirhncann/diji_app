@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
               onBackground: AppColors.white,
               surface: AppColors.dark,
               onSurface: AppColors.red)),
-      home: HomePage(),
+      home: WatchlistPage(),
     );
   }
 }
