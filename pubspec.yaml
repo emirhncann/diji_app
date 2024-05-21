@@ -28,6 +28,7 @@ dependencies:
 
   json_annotation: ^4.9.0
   http: ^1.2.1
+  shared_preferences: ^2.2.3
 
   #STYLE
   cupertino_icons: ^1.0.6

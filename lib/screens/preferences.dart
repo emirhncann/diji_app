@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart'; // Firestore eklendi
 import 'dart:math';
 
 import 'package:social_movie_app/constants/color.dart';
+import 'package:social_movie_app/screens/home.dart';
 import 'package:social_movie_app/screens/suprise.dart';
 
 final storage =
@@ -78,7 +79,7 @@ class _PreferencePageState extends State<PreferencePage> {
       Future.delayed(Duration(milliseconds: 500), () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SupriseMePage()),
+          MaterialPageRoute(builder: (context) => HomePage()),
         );
       });
     }).catchError((error) {

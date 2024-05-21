@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:social_movie_app/constants/color.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:social_movie_app/screens/sign_up.dart';
+import 'package:social_movie_app/screens/home.dart'; // Anasayfa ekranını buraya ekleyin
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -29,6 +30,11 @@ class _SignInScreenState extends State<SignInScreen> {
         password: _password,
       );
       print('E-posta ile giriş yapıldı: ${userCredential.user!.uid}');
+      // Giriş başarılı, anasayfaya yönlendir
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
     } catch (e) {
       setState(() {
         _error = e.toString();
@@ -49,6 +55,11 @@ class _SignInScreenState extends State<SignInScreen> {
       UserCredential userCredential =
           await _auth.signInWithCredential(credential);
       print('Google ile giriş yapıldı: ${userCredential.user!.uid}');
+      // Giriş başarılı, anasayfaya yönlendir
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
     } catch (e) {
       setState(() {
         _error = e.toString();

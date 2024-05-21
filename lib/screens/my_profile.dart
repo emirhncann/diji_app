@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_movie_app/constants/bottom_nav_bar.dart';
 import 'package:social_movie_app/constants/color.dart';
 import 'package:social_movie_app/models/add_post.dart';
@@ -12,7 +15,47 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  List<Post> posts = [];
+  Set<Post> posts =
+      {}; // Set kullanarak postların yalnızca benzersiz olanlarını saklayacağız
+  late String userName;
+  late String userSurname;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+    fetchUserPosts();
+  }
+
+  Future<void> fetchUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('userName') ?? '';
+      userSurname = prefs.getString('userSurname') ?? '';
+    });
+  }
+
+  Future<void> fetchUserPosts() async {
+    try {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+          .instance
+          .collection('users')
+          .doc(uid)
+          .collection('posts')
+          .get();
+
+      List<Post> userPosts =
+          snapshot.docs.map((doc) => Post.fromMap(doc.data())).toList();
+
+      // Set içine postları ekleyerek yalnızca benzersiz olanları saklayacağız
+      setState(() {
+        posts.addAll(userPosts);
+      });
+    } catch (e) {
+      print("Error fetching user posts: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage('assets/profile_image.jpg'),
+                    //backgroundImage: AssetImage('assets/profile_image.jpg'),
                   ),
                   SizedBox(width: 20),
                   Padding(
@@ -45,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       children: [
                         Text(
-                          'Emirhan Can',
+                          "$userName $userSurname",
                           style:
                               TextStyle(fontSize: 24, color: AppColors.white),
                         ),
@@ -75,19 +118,18 @@ class _ProfilePageState extends State<ProfilePage> {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: posts.length,
                     itemBuilder: (context, index) {
-                      final reversedIndex = posts.length - 1 - index;
                       return Card(
                         color: AppColors.black,
                         child: ListTile(
                           title: Text(
-                            posts[reversedIndex].filmName,
+                            posts.elementAt(index).filmName,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 18),
                           ),
                           subtitle: Text(
-                            posts[reversedIndex].comment,
+                            posts.elementAt(index).comment,
                             style: TextStyle(color: Colors.white),
                           ),
                           onTap: () {
@@ -108,9 +150,8 @@ class _ProfilePageState extends State<ProfilePage> {
             builder: (BuildContext context) {
               return AddPostDialog(
                 onPostAdded: (String filmName, String comment) {
-                  setState(() {
-                    posts.add(Post(filmName, comment));
-                  });
+                  // Firestore'a gönderi ekleme
+                  addPostToFirestore(filmName, comment);
                 },
               );
             },
@@ -149,6 +190,26 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+
+  void addPostToFirestore(String filmName, String comment) async {
+    try {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .collection('posts')
+          .add({
+        'filmName': filmName,
+        'comment': comment,
+        'timestamp': Timestamp.now(),
+      });
+
+      // Gönderi eklendikten sonra tüm gönderileri yeniden getir
+      fetchUserPosts();
+    } catch (e) {
+      print("Error adding post to Firestore: $e");
+    }
+  }
 }
 
 class Post {
@@ -156,4 +217,20 @@ class Post {
   String comment;
 
   Post(this.filmName, this.comment);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Post &&
+        other.filmName == filmName &&
+        other.comment == comment;
+  }
+
+  @override
+  int get hashCode => filmName.hashCode ^ comment.hashCode;
+
+  // Firestore'dan veri alındığında Post nesnesi oluşturmak için fabrika metodu
+  factory Post.fromMap(Map<String, dynamic> map) {
+    return Post(map['filmName'], map['comment']);
+  }
 }

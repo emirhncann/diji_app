@@ -1,8 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_movie_app/constants/bottom_nav_bar.dart';
 import 'package:social_movie_app/constants/color.dart';
+import 'package:social_movie_app/models/ai_suggest.dart';
 import 'package:social_movie_app/models/movie.dart';
 import 'package:social_movie_app/models/popular.dart';
 import 'package:social_movie_app/models/movie_slider.dart';
@@ -23,12 +27,44 @@ class _HomePageState extends State<HomePage> {
   late Future<List<Result>> topRatedMovies;
   late Future<List<Result>> upcomingMovies;
 
+  String localUserName = "";
+  String localUserSurname = "";
+  String userId = "";
+
   @override
   void initState() {
     super.initState();
     trendingMovies = api().getTrendingMovies();
     topRatedMovies = api().getTopRatedMovies();
     upcomingMovies = api().getUpcomingMovies();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        String uid = user.uid;
+        DocumentSnapshot userDoc =
+            await FirebaseFirestore.instance.collection('users').doc(uid).get();
+
+        setState(() {
+          localUserName = userDoc['name'];
+          localUserSurname = userDoc['surname'];
+        });
+        // SharedPreferences kullanarak kullanıcı verilerini kaydetme
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('userName', localUserName);
+        await prefs.setString('userSurname', localUserSurname);
+        await prefs.setString('userId', uid);
+        print(
+            "User Name: $localUserName"); // Print the user's name to the console
+      } else {
+        print("No user is signed in.");
+      }
+    } catch (e) {
+      print("Error fetching user data: $e");
+    }
   }
 
   @override
@@ -36,15 +72,18 @@ class _HomePageState extends State<HomePage> {
     var _pageIndex = 0;
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.black54,
-          title: Center(
-              /* child: Image.asset(
-              'assets/beyaz_png.png',
-              width: 100,
-              height: 100,
-            ),*/
-              )),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.black54,
+        title: Center(
+          child: Text(
+            "Hoşgeldin $localUserName ",
+            style: GoogleFonts.belleza(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Padding(
@@ -53,7 +92,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Popüler Filmler",
+                "Günün Popüleri",
                 style: GoogleFonts.belleza(
                     fontSize: 22, fontWeight: FontWeight.w600),
               ),
@@ -76,7 +115,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 16),
               Text(
-                "Yakında Gösterimde",
+                "Yakında Popüler",
                 style: GoogleFonts.belleza(
                     fontSize: 22, fontWeight: FontWeight.w600),
               ),
@@ -145,7 +184,7 @@ class _HomePageState extends State<HomePage> {
           if (index == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SupriseMePage()),
+              MaterialPageRoute(builder: (context) => AISuggestPage()),
             );
           }
           if (index == 2) {

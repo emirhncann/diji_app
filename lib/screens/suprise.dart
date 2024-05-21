@@ -94,6 +94,20 @@ class _SupriseMePageState extends State<SupriseMePage>
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Text(
+                'Öncelikle hoşgeldin! Hemen çarkı çevir ve yapay zeka destekli film önerini al.',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.white),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
           Expanded(
             child: Center(
               child: _wheelImage != null
@@ -108,14 +122,28 @@ class _SupriseMePageState extends State<SupriseMePage>
                   : CircularProgressIndicator(),
             ),
           ),
-          Container(),
           ElevatedButton(
             onPressed: () async {
               _startRotationAnimation();
               await movieSuggest();
               // Butona basıldığında animasyonu başlat
             },
-            child: Text('Surprise Me!'),
+            child: Text(
+              'Surprise Me!',
+              style: TextStyle(color: Colors.white),
+            ),
+            style: ButtonStyle(
+              elevation: MaterialStateProperty.all(
+                  4), // Adjust the elevation value as needed
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                      8.0), // Adjust the border radius as needed
+                ),
+              ),
+              backgroundColor: MaterialStateProperty.all(
+                  AppColors.red), // Adjust the background color as needed
+            ),
           ),
           SizedBox(
             height: 20,
