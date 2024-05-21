@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:social_movie_app/constants/api.dart';
+import 'package:social_movie_app/models/ai_suggest.dart';
 
 @JsonSerializable()
 class Result {
@@ -106,6 +107,17 @@ class api {
   }
 
   Future<List<Result>> getTopRatedMovies() async {
+    final response = await http.get(Uri.parse(_TopRatedUrl));
+    if (response.statusCode == 200) {
+      final decodedData = json.decode(response.body)["results"] as List;
+      print(decodedData);
+      return decodedData.map((movie) => Result.fromJson(movie)).toList();
+    } else {
+      throw Exception("Hata");
+    }
+  }
+
+  Future<List<Result>> getAISuggestedMovies() async {
     final response = await http.get(Uri.parse(_TopRatedUrl));
     if (response.statusCode == 200) {
       final decodedData = json.decode(response.body)["results"] as List;

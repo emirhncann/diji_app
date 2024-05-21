@@ -70,7 +70,7 @@ class AuthCheck extends StatelessWidget {
           if (isLoggedIn) {
             return HomePage();
           } else {
-            return HomePage();
+            return SignInScreen();
           }
         }
       },

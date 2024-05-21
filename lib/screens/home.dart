@@ -6,7 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:social_movie_app/constants/bottom_nav_bar.dart';
 import 'package:social_movie_app/constants/color.dart';
+import 'package:social_movie_app/models/ai_suggest.dart' as ai;
 import 'package:social_movie_app/models/ai_suggest.dart';
+import 'package:social_movie_app/models/movie.dart' as movie;
 import 'package:social_movie_app/models/movie.dart';
 import 'package:social_movie_app/models/popular.dart';
 import 'package:social_movie_app/models/movie_slider.dart';
@@ -23,9 +25,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<Result>> trendingMovies;
-  late Future<List<Result>> topRatedMovies;
-  late Future<List<Result>> upcomingMovies;
+  late Future<List<movie.Result>> trendingMovies;
+  late Future<List<movie.Result>> topRatedMovies;
+  late Future<List<movie.Result>> upcomingMovies;
 
   String localUserName = "";
   String localUserSurname = "";
@@ -37,6 +39,7 @@ class _HomePageState extends State<HomePage> {
     trendingMovies = api().getTrendingMovies();
     topRatedMovies = api().getTopRatedMovies();
     upcomingMovies = api().getUpcomingMovies();
+
     fetchUserData();
   }
 
@@ -101,7 +104,7 @@ class _HomePageState extends State<HomePage> {
               ),
               FutureBuilder(
                 future: trendingMovies,
-                builder: (context, AsyncSnapshot<List<Result>> snapshot) {
+                builder: (context, AsyncSnapshot<List<movie.Result>> snapshot) {
                   if (snapshot.hasError) {
                     return Center(
                       child: Text(snapshot.error.toString()),
@@ -124,7 +127,7 @@ class _HomePageState extends State<HomePage> {
               ),
               FutureBuilder(
                 future: upcomingMovies,
-                builder: (context, AsyncSnapshot<List<Result>> snapshot) {
+                builder: (context, AsyncSnapshot<List<movie.Result>> snapshot) {
                   if (snapshot.hasError) {
                     return Center(
                       child: Text(snapshot.error.toString()),
@@ -145,7 +148,6 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 16,
               ),
-              third(),
               const SizedBox(height: 16),
               Text(
                 "En Yüksek Puanlı Filmler",
@@ -157,7 +159,7 @@ class _HomePageState extends State<HomePage> {
               ),
               FutureBuilder(
                 future: topRatedMovies,
-                builder: (context, AsyncSnapshot<List<Result>> snapshot) {
+                builder: (context, AsyncSnapshot<List<movie.Result>> snapshot) {
                   if (snapshot.hasError) {
                     return Center(
                       child: Text(snapshot.error.toString()),
@@ -184,7 +186,7 @@ class _HomePageState extends State<HomePage> {
           if (index == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AISuggestPage()),
+              MaterialPageRoute(builder: (context) => SupriseMePage()),
             );
           }
           if (index == 2) {
