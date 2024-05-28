@@ -11,6 +11,7 @@ import 'package:social_movie_app/models/watch_list.dart';
 import 'package:social_movie_app/screens/account.dart';
 import 'package:social_movie_app/screens/home.dart';
 import 'package:social_movie_app/screens/my_profile.dart';
+import 'package:social_movie_app/screens/watch_list_page.dart';
 
 class SupriseMePage extends StatefulWidget {
   const SupriseMePage({Key? key}) : super(key: key);
@@ -164,16 +165,16 @@ class _SupriseMePageState extends State<SupriseMePage>
               MaterialPageRoute(builder: (context) => HomePage()),
             );
           }
-          if (index == 2) {
+          if (index == 3) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ProfilePage()),
             );
           }
-          if (index == 3) {
+          if (index == 2) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AccountPage()),
+              MaterialPageRoute(builder: (context) => WatchlistPage()),
             );
           }
         },

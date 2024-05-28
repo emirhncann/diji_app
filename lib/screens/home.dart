@@ -140,14 +140,14 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const SizedBox(height: 16),
-              Text(
+              /* Text(
                 "Size Özel",
                 style: GoogleFonts.belleza(
                     fontSize: 22, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 16,
-              ),
+              ),*/
               const SizedBox(height: 16),
               Text(
                 "En Yüksek Puanlı Filmler",

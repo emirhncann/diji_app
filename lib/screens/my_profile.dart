@@ -8,6 +8,7 @@ import 'package:social_movie_app/models/add_post.dart';
 import 'package:social_movie_app/screens/account.dart';
 import 'package:social_movie_app/screens/home.dart';
 import 'package:social_movie_app/screens/suprise.dart';
+import 'package:social_movie_app/screens/watch_list_page.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -183,7 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
           if (index == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AccountPage()),
+              MaterialPageRoute(builder: (context) => WatchlistPage()),
             );
           }
         },
