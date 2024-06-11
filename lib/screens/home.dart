@@ -13,6 +13,7 @@ import 'package:social_movie_app/models/movie.dart';
 import 'package:social_movie_app/models/popular.dart';
 import 'package:social_movie_app/models/movie_slider.dart';
 import 'package:social_movie_app/screens/account.dart';
+import 'package:social_movie_app/screens/search.dart';
 import 'package:social_movie_app/screens/watch_list_page.dart';
 import 'package:social_movie_app/screens/my_profile.dart';
 import 'package:social_movie_app/screens/suprise.dart';
@@ -99,7 +100,10 @@ class _HomePageState extends State<HomePage> {
                 size: 30,
               ),
               onPressed: () {
-                // Handle icon press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SearchPage()),
+                );
               },
             ),
           ],
