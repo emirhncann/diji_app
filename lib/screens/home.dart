@@ -77,14 +77,32 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.black54,
-        title: Center(
-          child: Text(
-            "Hoşgeldin $localUserName ",
-            style: GoogleFonts.belleza(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(width: 40), // to add some space at the beginning
+            Expanded(
+              child: Center(
+                child: Text(
+                  "Hoşgeldin $localUserName ",
+                  style: GoogleFonts.belleza(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
             ),
-          ),
+            IconButton(
+              icon: Icon(
+                Icons.person_search,
+                color: AppColors.white,
+                size: 30,
+              ),
+              onPressed: () {
+                // Handle icon press
+              },
+            ),
+          ],
         ),
       ),
       body: SingleChildScrollView(

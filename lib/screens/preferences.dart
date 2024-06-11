@@ -168,10 +168,14 @@ class _PreferencePageState extends State<PreferencePage> {
   Widget build(BuildContext context) {
     print(categories);
     return Scaffold(
-      backgroundColor: AppColors.dark,
+      backgroundColor: Colors.black54,
       appBar: AppBar(
-        title: Text('Film Tercihi'),
-        backgroundColor: AppColors.red,
+        centerTitle: true,
+        title: Text(
+          'Sizi daha yakından tanımak isteriz',
+          style: TextStyle(color: AppColors.white, fontSize: 16),
+        ),
+        backgroundColor: AppColors.black,
       ),
       body: Center(
         child: Column(

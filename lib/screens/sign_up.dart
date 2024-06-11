@@ -27,7 +27,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: AppColors.black,
+      backgroundColor: Colors.black54,
       body: SingleChildScrollView(
         padding: EdgeInsets.only(top: height * 0.1),
         child: Padding(
